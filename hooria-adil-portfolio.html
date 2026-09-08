@@ -46,6 +46,30 @@
       overflow-x: hidden;
     }
 
+    main {
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    body.is-sliding main {
+      opacity: 0.72;
+      transform: translateY(8px);
+    }
+
+    @keyframes section-slide {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-slide {
+      animation: section-slide 0.55s ease both;
+    }
+
     a {
       color: inherit;
       text-decoration: none;
@@ -270,6 +294,28 @@
       min-height: 320px;
       padding: 24px;
       overflow: hidden;
+      display: block;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .project-visual::after {
+      content: "Open live preview ↗";
+      position: absolute;
+      right: 24px;
+      top: 24px;
+      color: rgba(255, 255, 255, 0.82);
+      font-family: "DM Mono", monospace;
+      font-size: 0.62rem;
+      opacity: 0;
+      transform: translateY(-5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .project-visual:hover::after,
+    .project-visual:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .project-visual.green {
@@ -697,7 +743,13 @@
       <div class="projects">
         <!-- Herb & Hue -->
         <article class="project-card">
-          <div class="project-visual green">
+          <a
+            class="project-visual green"
+            href="https://vercel.com/hooria-adil/herb-hue-skin-care-website"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Herb & Hue live preview"
+          >
             <span class="project-number">01</span>
             <div class="browser-window">
               <div class="dots">
@@ -709,7 +761,7 @@
                 <div class="mock-cards"><span></span><span></span><span></span></div>
               </div>
             </div>
-          </div>
+          </a>
 
           <div class="project-info">
             <p class="project-type">Skincare E-Commerce Website</p>
@@ -743,7 +795,13 @@
 
         <!-- NuveStudio -->
         <article class="project-card">
-          <div class="project-visual purple">
+          <a
+            class="project-visual purple"
+            href="https://vercel.com/hooria-adil/nuve-studio"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open NuveStudio live preview"
+          >
             <span class="project-number">02</span>
             <div class="browser-window">
               <div class="dots">
@@ -755,7 +813,7 @@
                 <div class="mock-cards"><span></span><span></span><span></span></div>
               </div>
             </div>
-          </div>
+          </a>
 
           <div class="project-info">
             <p class="project-type">Interactive Creative Website</p>
@@ -789,7 +847,13 @@
 
         <!-- Filezy -->
         <article class="project-card">
-          <div class="project-visual orange">
+          <a
+            class="project-visual orange"
+            href="https://vercel.com/hooria-adil/filezy"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Filezy live preview"
+          >
             <span class="project-number">03</span>
             <div class="browser-window">
               <div class="dots">
@@ -801,7 +865,7 @@
                 <div class="mock-cards"><span></span><span></span><span></span></div>
               </div>
             </div>
-          </div>
+          </a>
 
           <div class="project-info">
             <p class="project-type">Frontend Web Project</p>
@@ -834,7 +898,13 @@
 
         <!-- FRESHCoob -->
         <article class="project-card">
-          <div class="project-visual blue">
+          <a
+            class="project-visual blue"
+            href="https://vercel.com/hooria-adil/recipe-maker"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open FRESHCoob live preview"
+          >
             <span class="project-number">04</span>
             <div class="browser-window">
               <div class="dots">
@@ -846,7 +916,7 @@
                 <div class="mock-cards"><span></span><span></span><span></span></div>
               </div>
             </div>
-          </div>
+          </a>
 
           <div class="project-info">
             <p class="project-type">Recipe Discovery Web Application</p>
@@ -960,6 +1030,33 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const target = document.querySelector(link.getAttribute("href"));
+
+        if (!target) return;
+
+        event.preventDefault();
+        document.body.classList.add("is-sliding");
+        history.pushState(null, "", link.getAttribute("href"));
+
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          target.classList.remove("section-slide");
+          void target.offsetWidth;
+          target.classList.add("section-slide");
+        }, 120);
+
+        setTimeout(() => {
+          document.body.classList.remove("is-sliding");
+        }, 380);
+
+        setTimeout(() => {
+          target.classList.remove("section-slide");
+        }, 800);
+      });
+    });
   </script>
 </body>
 </html>
