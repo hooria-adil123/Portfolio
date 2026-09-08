@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Hooria Adil | Frontend Developer</title>
+  <meta
+    name="description"
+    content="Frontend Developer portfolio of Hooria Adil — React, Next.js, JavaScript, TypeScript and responsive web development."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #0c0d10;
+      --surface: #15171c;
+      --surface-light: #1a1d23;
+      --text: #f3f0e9;
+      --muted: #9a9da8;
+      --line: #2a2d34;
+      --accent: #b9ff66;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Manrope", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      min-height: 88px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .github-link:hover {
+      color: var(--accent);
+    }
+
+    .github-link {
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      transition: 0.2s ease;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 720px;
+      padding: 125px 0 75px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow,
+    .section-label,
+    .project-type {
+      color: var(--accent);
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      font-size: clamp(3.6rem, 8vw, 7.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.085em;
+      font-weight: 800;
+    }
+
+    .highlight {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      max-width: 580px;
+      margin-top: 38px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      border-radius: 3px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-4px);
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: #111;
+    }
+
+    .button-secondary {
+      border: 1px solid #4c515d;
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      background: var(--surface-light);
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 65px;
+      margin-top: 100px;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .stat strong {
+      font-size: 1.65rem;
+      letter-spacing: -0.06em;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    /* GENERAL SECTIONS */
+    section.section {
+      padding: 115px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin-bottom: 24px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 95px;
+      align-items: start;
+    }
+
+    h2 {
+      font-size: clamp(2.3rem, 4.8vw, 4.6rem);
+      line-height: 1.04;
+      letter-spacing: -0.075em;
+    }
+
+    .about-text {
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.9;
+    }
+
+    .about-text p + p {
+      margin-top: 20px;
+    }
+
+    /* PROJECTS */
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 48px;
+    }
+
+    .section-heading .intro {
+      max-width: 410px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.75;
+    }
+
+    .projects {
+      display: grid;
+      gap: 22px;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: #656a75;
+    }
+
+    .project-visual {
+      position: relative;
+      min-height: 320px;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .project-visual.green {
+      background: linear-gradient(140deg, #3e704d, #172a1c);
+    }
+
+    .project-visual.purple {
+      background: linear-gradient(140deg, #5b4076, #211d32);
+    }
+
+    .project-visual.orange {
+      background: linear-gradient(140deg, #8a5d35, #352417);
+    }
+
+    .project-visual.blue {
+      background: linear-gradient(140deg, #326e8d, #172d3d);
+    }
+
+    .project-number {
+      color: rgba(255, 255, 255, 0.8);
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+    }
+
+    .browser-window {
+      position: absolute;
+      right: -4px;
+      bottom: -5px;
+      width: 83%;
+      height: 70%;
+      padding: 18px;
+      background: #f7f5f0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #c6c5c0;
+    }
+
+    .mock-content {
+      display: grid;
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .mock-home {
+      display: grid;
+      gap: 16px;
+      margin-top: 27px;
+      color: #33352f;
+      font-family: "Manrope", sans-serif;
+    }
+
+    .mock-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.55rem;
+      font-weight: 800;
+    }
+
+    .mock-nav span:last-child {
+      color: #888a83;
+      font-size: 0.42rem;
+      font-weight: 500;
+    }
+
+    .mock-hero {
+      display: grid;
+      gap: 8px;
+      padding: 18px 13px;
+      background: #e3e9dd;
+    }
+
+    .mock-hero strong {
+      max-width: 130px;
+      font-size: 0.95rem;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .mock-hero small {
+      width: 70%;
+      height: 6px;
+      background: #b9c8b2;
+      border-radius: 20px;
+    }
+
+    .mock-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .mock-cards span {
+      height: 28px;
+      background: #deddd8;
+    }
+
+    .mock-content span {
+      display: block;
+      height: 13px;
+      width: 100%;
+      background: #deddd8;
+      border-radius: 20px;
+    }
+
+    .mock-content span:nth-child(2) {
+      width: 72%;
+    }
+
+    .mock-content span:nth-child(3) {
+      width: 50%;
+    }
+
+    .project-info {
+      padding: 43px;
+    }
+
+    .project-type {
+      margin-bottom: 13px;
+    }
+
+    .project-info h3 {
+      font-size: 2rem;
+      letter-spacing: -0.055em;
+      margin-bottom: 15px;
+    }
+
+    .project-info > p:not(.project-type) {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.75;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 27px 0;
+    }
+
+    .tech-tags span {
+      border: 1px solid #3b3e46;
+      color: #d6d4ce;
+      border-radius: 100px;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    .project-link {
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 5px;
+    }
+
+    .project-link span {
+      color: var(--accent);
+      margin-left: 8px;
+    }
+
+    /* SKILLS */
+    .skills-heading {
+      max-width: 700px;
+      margin-bottom: 52px;
+    }
+
+    .skill-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid var(--line);
+    }
+
+    .skill-list div {
+      padding: 18px 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 1rem;
+    }
+
+    .skill-list b {
+      color: var(--accent);
+      font-family: "DM Mono", monospace;
+      font-size: 0.65rem;
+      margin-right: 13px;
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 115px 0 40px;
+    }
+
+    .contact h2 {
+      margin-bottom: 40px;
+    }
+
+    .email {
+      display: inline-block;
+      max-width: 100%;
+      font-size: clamp(1.25rem, 3vw, 2.7rem);
+      letter-spacing: -0.055em;
+      overflow-wrap: anywhere;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 8px;
+    }
+
+    .email span {
+      color: var(--accent);
+    }
+
+    .contact-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      margin-top: 115px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 22px;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 26px 0 38px;
+      border-top: 1px solid var(--line);
+      color: #727682;
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 32px, 1120px);
+      }
+
+      .navbar {
+        min-height: 75px;
+        justify-content: flex-start;
+        overflow-x: auto;
+      }
+
+      .nav-links {
+        gap: 24px;
+        font-size: 0.78rem;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 92px 0 70px;
+      }
+
+      .hero-stats {
+        gap: 26px;
+        margin-top: 70px;
+      }
+
+      .stat strong {
+        font-size: 1.25rem;
+      }
+
+      .stat span {
+        font-size: 0.68rem;
+      }
+
+      section.section {
+        padding: 80px 0;
+      }
+
+      .about-grid,
+      .project-card {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading .intro {
+        margin-top: 17px;
+      }
+
+      .project-visual {
+        min-height: 245px;
+      }
+
+      .project-info {
+        padding: 28px;
+      }
+
+      .skill-list {
+        grid-template-columns: 1fr;
+      }
+
+      .contact {
+        padding-top: 80px;
+      }
+
+      .contact-bottom,
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <nav class="navbar container">
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#work">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <section id="home" class="hero container">
+      <p class="eyebrow">Hi, I&apos;m Hooria here.</p>
+
+      <h1>
+        I build clean,<br />
+        <span class="highlight">responsive web</span><br />
+        experiences.
+      </h1>
+
+      <p class="hero-description">
+        I build responsive websites and web applications. From e-commerce
+        platforms to AI-powered web experiences, I enjoy transforming concepts
+        into real-world products.
+      </p>
+
+      <div class="hero-buttons">
+        <a class="button button-primary" href="#work">
+          Explore my work <span>↓</span>
+        </a>
+
+        <a class="button button-secondary" href="#contact">
+          Let&apos;s work together
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <strong>04</strong>
+          <span>Featured projects</span>
+        </div>
+
+        <div class="stat">
+          <strong>06+</strong>
+          <span>Core technologies</span>
+        </div>
+
+        <div class="stat">
+          <strong>2025</strong>
+          <span>Building for the web</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section container">
+      <p class="section-label">01 / About Me</p>
+
+      <div class="about-grid">
+        <h2>
+          Turning ideas into<br />
+          <span class="highlight">useful digital experiences.</span>
+        </h2>
+
+        <div class="about-text">
+          <p>
+            I enjoy designing and developing responsive, accessible, and
+            visually thoughtful web applications. My approach combines strong
+            frontend fundamentals with clean structure, reusable components,
+            and user-focused design.
+          </p>
+
+          <p>
+            I am currently growing as a frontend developer while building
+            full-stack web development skills through practical projects and
+            modern web technologies.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section container">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">02 / Selected Work</p>
+          <h2>Projects I have built.</h2>
+        </div>
+
+        <p class="intro">
+          Responsive interfaces and interactive applications built with modern
+          frontend tools and a focus on usability.
+        </p>
+      </div>
+
+      <div class="projects">
+        <!-- Herb & Hue -->
+        <article class="project-card">
+          <div class="project-visual green">
+            <span class="project-number">01</span>
+            <div class="browser-window">
+              <div class="dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mock-home">
+                <div class="mock-nav"><span>HERB &amp; HUE</span><span>SHOP &nbsp; ABOUT &nbsp; CART</span></div>
+                <div class="mock-hero"><strong>Care made simple.</strong><small></small></div>
+                <div class="mock-cards"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <p class="project-type">Skincare E-Commerce Website</p>
+            <h3>Herb & Hue</h3>
+
+            <p>
+              A responsive skincare e-commerce website focused on product
+              discovery, intuitive navigation, promotional sections, and a
+              polished shopping experience.
+            </p>
+
+            <div class="tech-tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Next.js</span>
+            </div>
+
+            <div class="project-links">
+              <a
+                class="project-link"
+                href="https://vercel.com/hooria-adil/herb-hue-skin-care-website"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open live preview <span>↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- NuveStudio -->
+        <article class="project-card">
+          <div class="project-visual purple">
+            <span class="project-number">02</span>
+            <div class="browser-window">
+              <div class="dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mock-home">
+                <div class="mock-nav"><span>NUVESTUDIO</span><span>WORK &nbsp; INFO &nbsp; CONTACT</span></div>
+                <div class="mock-hero"><strong>Ideas in motion.</strong><small></small></div>
+                <div class="mock-cards"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <p class="project-type">Interactive Creative Website</p>
+            <h3>NuveStudio</h3>
+
+            <p>
+              A responsive web project built with React and TypeScript,
+              featuring component-based development, interactive motion
+              effects, and modern layouts.
+            </p>
+
+            <div class="tech-tags">
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>CSS</span>
+              <span>Responsive UI</span>
+            </div>
+
+            <div class="project-links">
+              <a
+                class="project-link"
+                href="https://vercel.com/hooria-adil/nuve-studio"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open live preview <span>↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Filezy -->
+        <article class="project-card">
+          <div class="project-visual orange">
+            <span class="project-number">03</span>
+            <div class="browser-window">
+              <div class="dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mock-home">
+                <div class="mock-nav"><span>FILEZY</span><span>FILES &nbsp; FEATURES &nbsp; LOGIN</span></div>
+                <div class="mock-hero"><strong>Organize your files.</strong><small></small></div>
+                <div class="mock-cards"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <p class="project-type">Frontend Web Project</p>
+            <h3>Filezy</h3>
+
+            <p>
+              A frontend project demonstrating structured UI development,
+              responsive layout techniques, and a clean user experience.
+            </p>
+
+            <div class="tech-tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Responsive Design</span>
+            </div>
+
+            <div class="project-links">
+              <a
+                class="project-link"
+                href="https://vercel.com/hooria-adil/filezy"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open live preview <span>↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- FRESHCoob -->
+        <article class="project-card">
+          <div class="project-visual blue">
+            <span class="project-number">04</span>
+            <div class="browser-window">
+              <div class="dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mock-home">
+                <div class="mock-nav"><span>FRESHCOOB</span><span>RECIPES &nbsp; ABOUT &nbsp; START</span></div>
+                <div class="mock-hero"><strong>Make something fresh.</strong><small></small></div>
+                <div class="mock-cards"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <p class="project-type">Recipe Discovery Web Application</p>
+            <h3>FRESHCoob</h3>
+
+            <p>
+              A responsive recipe-maker application that helps users discover
+              recipe ideas based on available ingredients through a simple and
+              intuitive user flow.
+            </p>
+
+            <div class="tech-tags">
+              <span>React</span>
+              <span>Next.js</span>
+              <span>JavaScript</span>
+              <span>CSS</span>
+              <span>Vercel</span>
+            </div>
+
+            <div class="project-links">
+              <a
+                class="project-link"
+                href="https://vercel.com/hooria-adil/recipe-maker"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open live preview <span>↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section container">
+      <p class="section-label">03 / Tech Stack / Toolkit</p>
+      <h2 class="skills-heading">
+        Tools I use to bring interfaces to life.
+      </h2>
+
+      <div class="skill-list">
+        <div><b>01</b> HTML5</div>
+        <div><b>02</b> CSS3</div>
+        <div><b>03</b> JavaScript</div>
+        <div><b>04</b> TypeScript</div>
+        <div><b>05</b> React</div>
+        <div><b>06</b> Next.js</div>
+        <div><b>07</b> GitHub</div>
+        <div><b>08</b> Vercel</div>
+        <div><b>09</b> VS Code</div>
+      </div>
+    </section>
+
+    <section id="services" class="section container">
+      <p class="section-label">04 / Services</p>
+      <h2 class="skills-heading">
+        Digital solutions built around your goals.
+      </h2>
+
+      <div class="skill-list">
+        <div><b>01</b> Custom Software Development</div>
+        <div><b>02</b> Web Development</div>
+        <div><b>03</b> Responsive Design</div>
+        <div><b>04</b> UI/UX</div>
+        <div><b>05</b> Ecommerce Web Development</div>
+        <div><b>06</b> Landing Pages</div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact container">
+      <p class="section-label">05 / Contact</p>
+
+      <h2>
+        Have an idea?<br />
+        <span class="highlight">Let&apos;s build it.</span>
+      </h2>
+
+      <a class="email" href="mailto:hooriaa619@gmail.com">
+        hooriaa619@gmail.com <span>↗</span>
+      </a>
+
+      <div class="contact-bottom">
+        <p>Karachi, Pakistan</p>
+
+        <div class="social-links">
+          <a
+            href="https://www.linkedin.com/in/hooria-adil-a44b29330/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+
+          <a
+            href="https://github.com/hooria-adil123"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+
+          <a href="tel:03362774162">03362774162</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="container">
+      <p>© <span id="year"></span> Hooria Adil</p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
