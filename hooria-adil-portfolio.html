@@ -40,10 +40,34 @@
     }
 
     body {
+      position: relative;
       background: var(--bg);
       color: var(--text);
       font-family: "Manrope", sans-serif;
       overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: linear-gradient(rgba(185, 255, 102, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(185, 255, 102, 0.07) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background: radial-gradient(circle at 12% 18%, rgba(255, 0, 92, 0.11), transparent 24%),
+        radial-gradient(circle at 88% 42%, rgba(0, 196, 255, 0.1), transparent 25%);
     }
 
     main {
@@ -120,12 +144,66 @@
 
     /* HERO */
     .hero {
+      position: relative;
+      isolation: isolate;
       min-height: 720px;
       padding: 125px 0 75px;
       border-bottom: 1px solid var(--line);
       display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+
+    .hero-slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      pointer-events: none;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 0.8s ease, transform 1.4s ease;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .hero-slide.is-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(12, 13, 16, 0.98) 0%, rgba(12, 13, 16, 0.84) 45%, rgba(12, 13, 16, 0.5) 100%);
+    }
+
+    .hero-slide::after {
+      content: "";
+      position: absolute;
+      inset: 12% 8% 18% 58%;
+      border: 1px solid rgba(185, 255, 102, 0.28);
+      box-shadow: 12px 0 rgba(255, 0, 92, 0.18), -12px 0 rgba(0, 196, 255, 0.16);
+      transform: skewY(-8deg);
+    }
+
+    .hero-slide.slide-green {
+      background-image: linear-gradient(135deg, #173322, #4a8d61 45%, #111 46%, #111);
+    }
+
+    .hero-slide.slide-pink {
+      background-image: linear-gradient(135deg, #28162d, #914c75 45%, #111 46%, #111);
+    }
+
+    .hero-slide.slide-blue {
+      background-image: linear-gradient(135deg, #132a39, #347b98 45%, #111 46%, #111);
     }
 
     .eyebrow,
@@ -167,6 +245,38 @@
       flex-wrap: wrap;
       gap: 14px;
       margin-top: 34px;
+    }
+
+    .slideshow-controls {
+      position: absolute;
+      right: 0;
+      bottom: 32px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 1px solid var(--muted);
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      transition: width 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .slide-dot.is-active {
+      width: 26px;
+      border-radius: 10px;
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+
+    .rgb-accent {
+      text-shadow: 2px 0 rgba(255, 0, 92, 0.28), -2px 0 rgba(0, 196, 255, 0.24);
     }
 
     .button {
@@ -314,6 +424,7 @@
     .project-card:hover {
       transform: translateY(-5px);
       border-color: #656a75;
+      box-shadow: 4px 0 rgba(255, 0, 92, 0.18), -4px 0 rgba(0, 196, 255, 0.15);
     }
 
     .project-visual {
@@ -579,6 +690,21 @@
         flex-direction: column;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 
@@ -595,9 +721,15 @@
     </nav>
 
     <section id="home" class="hero container">
+      <div class="hero-slideshow" aria-hidden="true">
+        <div class="hero-slide slide-green is-active"></div>
+        <div class="hero-slide slide-pink"></div>
+        <div class="hero-slide slide-blue"></div>
+      </div>
+
       <p class="eyebrow">Hi, I&apos;m Hooria here.</p>
 
-      <h1>
+      <h1 class="rgb-accent">
         I build clean,<br />
         <span class="highlight">responsive web</span><br />
         experiences.
@@ -617,6 +749,12 @@
         <a class="button button-secondary" href="#contact">
           Let&apos;s work together
         </a>
+      </div>
+
+      <div class="slideshow-controls" aria-label="Hero background slideshow controls">
+        <button class="slide-dot is-active" type="button" aria-label="Show slide 1"></button>
+        <button class="slide-dot" type="button" aria-label="Show slide 2"></button>
+        <button class="slide-dot" type="button" aria-label="Show slide 3"></button>
       </div>
 
       <div class="hero-stats">
@@ -948,6 +1086,42 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const heroSlides = [...document.querySelectorAll(".hero-slide")];
+    const slideDots = [...document.querySelectorAll(".slide-dot")];
+    const slideshow = document.querySelector(".hero-slideshow");
+    let activeSlide = 0;
+    let slideshowTimer;
+
+    const showSlide = (slideIndex) => {
+      activeSlide = (slideIndex + heroSlides.length) % heroSlides.length;
+      heroSlides.forEach((slide, index) => {
+        slide.classList.toggle("is-active", index === activeSlide);
+      });
+      slideDots.forEach((dot, index) => {
+        dot.classList.toggle("is-active", index === activeSlide);
+        dot.setAttribute("aria-current", index === activeSlide ? "true" : "false");
+      });
+    };
+
+    const startSlideshow = () => {
+      clearInterval(slideshowTimer);
+      slideshowTimer = setInterval(() => showSlide(activeSlide + 1), 5200);
+    };
+
+    slideDots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        showSlide(index);
+        startSlideshow();
+      });
+    });
+
+    slideshow.addEventListener("mouseenter", () => clearInterval(slideshowTimer));
+    slideshow.addEventListener("mouseleave", startSlideshow);
+    slideshow.addEventListener("focusin", () => clearInterval(slideshowTimer));
+    slideshow.addEventListener("focusout", startSlideshow);
+    showSlide(0);
+    startSlideshow();
 
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
       link.addEventListener("click", (event) => {
