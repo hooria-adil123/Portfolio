@@ -292,11 +292,19 @@
     .project-visual {
       position: relative;
       min-height: 320px;
-      padding: 24px;
       overflow: hidden;
       display: block;
       color: inherit;
       cursor: pointer;
+    }
+
+    .project-preview {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      border: 0;
+      display: block;
+      background: #f7f5f0;
     }
 
     .project-visual::after {
@@ -443,105 +451,6 @@
       padding: 43px;
     }
 
-    .project-type {
-      margin-bottom: 13px;
-    }
-
-    .project-info h3 {
-      font-size: 2rem;
-      letter-spacing: -0.055em;
-      margin-bottom: 15px;
-    }
-
-    .project-info > p:not(.project-type) {
-      color: var(--muted);
-      font-size: 0.94rem;
-      line-height: 1.75;
-    }
-
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 27px 0;
-    }
-
-    .tech-tags span {
-      border: 1px solid #3b3e46;
-      color: #d6d4ce;
-      border-radius: 100px;
-      padding: 6px 10px;
-      font-size: 0.72rem;
-    }
-
-    .project-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px;
-    }
-
-    .project-link {
-      font-size: 0.82rem;
-      font-weight: 700;
-      border-bottom: 1px solid var(--accent);
-      padding-bottom: 5px;
-    }
-
-    .project-link span {
-      color: var(--accent);
-      margin-left: 8px;
-    }
-
-    /* SKILLS */
-    .skills-heading {
-      max-width: 700px;
-      margin-bottom: 52px;
-    }
-
-    .skill-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      border-top: 1px solid var(--line);
-    }
-
-    .skill-list div {
-      padding: 18px 10px;
-      border-bottom: 1px solid var(--line);
-      font-size: 1rem;
-    }
-
-    .skill-list b {
-      color: var(--accent);
-      font-family: "DM Mono", monospace;
-      font-size: 0.65rem;
-      margin-right: 13px;
-    }
-
-    /* CONTACT */
-    .contact {
-      padding: 115px 0 40px;
-    }
-
-    .contact h2 {
-      margin-bottom: 40px;
-    }
-
-    .email {
-      display: inline-block;
-      max-width: 100%;
-      font-size: clamp(1.25rem, 3vw, 2.7rem);
-      letter-spacing: -0.055em;
-      overflow-wrap: anywhere;
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 8px;
-    }
-
-    .email span {
-      color: var(--accent);
-    }
-
-    .contact-bottom {
-      display: flex;
       justify-content: space-between;
       gap: 25px;
       margin-top: 115px;
@@ -750,17 +659,12 @@
             rel="noopener noreferrer"
             aria-label="Open Herb & Hue live preview"
           >
-            <span class="project-number">01</span>
-            <div class="browser-window">
-              <div class="dots">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="mock-home">
-                <div class="mock-nav"><span>HERB &amp; HUE</span><span>SHOP &nbsp; ABOUT &nbsp; CART</span></div>
-                <div class="mock-hero"><strong>Care made simple.</strong><small></small></div>
-                <div class="mock-cards"><span></span><span></span><span></span></div>
-              </div>
-            </div>
+            <iframe
+              class="project-preview"
+              src="https://vercel.com/hooria-adil/herb-hue-skin-care-website"
+              title="Herb &amp; Hue live preview"
+              loading="lazy"
+            ></iframe>
           </a>
 
           <div class="project-info">
@@ -802,17 +706,12 @@
             rel="noopener noreferrer"
             aria-label="Open NuveStudio live preview"
           >
-            <span class="project-number">02</span>
-            <div class="browser-window">
-              <div class="dots">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="mock-home">
-                <div class="mock-nav"><span>NUVESTUDIO</span><span>WORK &nbsp; INFO &nbsp; CONTACT</span></div>
-                <div class="mock-hero"><strong>Ideas in motion.</strong><small></small></div>
-                <div class="mock-cards"><span></span><span></span><span></span></div>
-              </div>
-            </div>
+            <iframe
+              class="project-preview"
+              src="https://vercel.com/hooria-adil/nuve-studio"
+              title="NuveStudio live preview"
+              loading="lazy"
+            ></iframe>
           </a>
 
           <div class="project-info">
@@ -854,17 +753,12 @@
             rel="noopener noreferrer"
             aria-label="Open Filezy live preview"
           >
-            <span class="project-number">03</span>
-            <div class="browser-window">
-              <div class="dots">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="mock-home">
-                <div class="mock-nav"><span>FILEZY</span><span>FILES &nbsp; FEATURES &nbsp; LOGIN</span></div>
-                <div class="mock-hero"><strong>Organize your files.</strong><small></small></div>
-                <div class="mock-cards"><span></span><span></span><span></span></div>
-              </div>
-            </div>
+            <iframe
+              class="project-preview"
+              src="https://vercel.com/hooria-adil/filezy"
+              title="Filezy live preview"
+              loading="lazy"
+            ></iframe>
           </a>
 
           <div class="project-info">
@@ -905,17 +799,12 @@
             rel="noopener noreferrer"
             aria-label="Open FRESHCoob live preview"
           >
-            <span class="project-number">04</span>
-            <div class="browser-window">
-              <div class="dots">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="mock-home">
-                <div class="mock-nav"><span>FRESHCOOB</span><span>RECIPES &nbsp; ABOUT &nbsp; START</span></div>
-                <div class="mock-hero"><strong>Make something fresh.</strong><small></small></div>
-                <div class="mock-cards"><span></span><span></span><span></span></div>
-              </div>
-            </div>
+            <iframe
+              class="project-preview"
+              src="https://vercel.com/hooria-adil/recipe-maker"
+              title="FRESHCoob live preview"
+              loading="lazy"
+            ></iframe>
           </a>
 
           <div class="project-info">
